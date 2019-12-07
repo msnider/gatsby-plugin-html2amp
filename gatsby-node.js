@@ -20,6 +20,8 @@ exports.onPostBuild = (_, pluginOptions) => {
     ...pluginOptions
   }
   const absolutePaths = files.map(file =>
+    file.startsWith('!') ? 
+    slash('!' + path.join(process.cwd(), publicPath, file.substring(1))) : 
     slash(path.join(process.cwd(), publicPath, file))
   )
   const htmls = globby.sync(absolutePaths)
